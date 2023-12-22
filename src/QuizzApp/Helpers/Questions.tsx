@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import he from "he";
 import { Button } from "react-bootstrap";
-import { QuizContext } from "./Context";
-import { EndScreen } from "../Components/EndScreen";
+import { ResultScreen } from "../Components/EndScreen";
 
 export function Questions() {
+    const [resultScreen, setResultScreen] = useState(false);
     const [questions, setQuestions] = useState<string[]>([]);
     const [answers, setAnswers] = useState<string[][]>([]);
     const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
@@ -12,11 +12,11 @@ export function Questions() {
 
     const controller = new AbortController();
 
-    const { gameState, setGameState } = useContext(QuizContext);
-
     const questionList: string[] = [];
     const incorrectAnswers: string[][] = [];
     const correctAnswers: string[] = [];
+
+    
 
     function shuffleArray(arrayOfArray: string[][]) {
         arrayOfArray.map((subArray) => {
@@ -40,26 +40,30 @@ export function Questions() {
     }
 
     function handleButton() {
-        const check = [...selectedAnswers]
-        const correctedcheck = check.length !== correct_answers.length || check.some((item) => item === undefined)
+        const check = [...selectedAnswers];
+        const correctedcheck =
+            check.length !== correct_answers.length ||
+            check.some((item) => item === undefined);
 
-        while (correctedcheck){
-            return
-        }setGameState("endScreen")
+        while (correctedcheck) {
+            return;
+        }
+        setResultScreen(!resultScreen);
     }
 
-    function FinalResult():number{
-        const finalAnswerList = [...selectedAnswers]
-        let finalMarks = 0
-        correct_answers.map((item)=>{
-            finalAnswerList.map((itemCheck=>{
-                item === itemCheck ? finalMarks+=1 : null
-            }))
-        })
+    function FinalResult(): string {
+        const finalAnswerList = [...selectedAnswers];
+        let finalMarks = 0;
         
-        return finalMarks
+        correct_answers.map((item ) => {
+            finalAnswerList.map((itemCheck ) => {
+                item === itemCheck ? (finalMarks += 1) : null;
+            });
+        });
+        return `Your Score is ${finalMarks} /` + " " + correct_answers.length;
     }
 
+    
     useEffect(() => {
         fetch(
             "https://opentdb.com/api.php?amount=5&category=18&difficulty=medium&type=multiple"
@@ -108,45 +112,49 @@ export function Questions() {
             controller.abort();
         };
     }, []);
-
+    
     return (
         <>
-            <form action="submit">
-                {questions.map((question, index1) => (
-                    <fieldset key={index1}>
-                        <h2>{he.decode(question)}</h2>
+            <div>
+                <form action="">
+                    {questions.map((question, index1) => (
+                        <fieldset key={index1}>
+                            <h2>{he.decode(question)}</h2>
 
-                        {answers[index1].map((answerlist, subindex) => (
-                            <div key={`ans${subindex}`}>
-                                <input
-                                    type="radio"
-                                    id={`option${index1}_${subindex}`}
-                                    name={`ansgroup${index1}`}
-                                    value={answerlist}
-                                    onChange={(event) => {
-                                        const updatedAnswers = [
-                                            ...selectedAnswers,
-                                        ];
-                                        updatedAnswers[index1] =
-                                            event.target.value;
-                                        setSelectedAnswers(updatedAnswers);
-                                    }}
-                                />
+                            {answers[index1].map((answerlist, subindex) => (
+                                <div key={`ans${subindex}`} >
+                                    <input
+                                        
+                                        type="radio"
+                                        id={`option${index1}_${subindex}`}
+                                        name={`ansgroup${index1}`}
+                                        value={answerlist}
+                                        onChange={(event) => {
+                                            const updatedAnswers = [
+                                                ...selectedAnswers,
+                                            ];
+                                            updatedAnswers[index1] =
+                                                event.target.value;
+                                            setSelectedAnswers(updatedAnswers);
+                                        }}
+                                    />
 
-                                <label htmlFor={`option${index1}_${subindex}`}>
-                                    {he.decode(answerlist)}
-                                </label>
-                            </div>
-                        ))}
-                    </fieldset>
-                ))}
-                {gameState==="endScreen" ? (
-        <EndScreen Marks={50} />
-      ) : (
-        <Button onClick={handleButton} />
-      )}
-                
-            </form>
+                                    <label
+                                        htmlFor={`option${index1}_${subindex}`} style={{background: resultScreen && correct_answers.includes(answerlist) ? "green" : "inherit"  }}
+                                    >
+                                        {he.decode(answerlist)}
+                                    </label>
+                                </div>
+                            ))}
+                        </fieldset>
+                    ))}
+
+                    {!resultScreen ? (
+                        <Button onClick={handleButton}>Submit</Button>
+                    ) : null}
+                </form>
+                {resultScreen ? <ResultScreen Marks={FinalResult()} /> : null}
+            </div>
         </>
     );
 }

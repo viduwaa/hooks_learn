@@ -1,8 +1,6 @@
 
-
-export function EndScreen({Marks}:{Marks:number}) {
-  console.log(Marks)
+export  function ResultScreen({Marks}:{Marks:string}) {
   return (
-    <div>You Scored {Marks}</div>
+    <div>{Marks}</div>
   )
 }

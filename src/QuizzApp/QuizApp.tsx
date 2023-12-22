@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Container } from "react-bootstrap";
 import {Mainmenu} from "./Components/Mainmenu";
 import { Quiz } from "./Components/Quiz";
-import { EndScreen } from "./Components/EndScreen";
+
 import { QuizContext } from "./Helpers/Context";
 
 export default function QuizApp() {
@@ -13,8 +13,7 @@ export default function QuizApp() {
             <QuizContext.Provider value={{ gameState, setGameState }}>
                 <h1 className="text-center">Quizz App</h1>
                 {gameState === "menu" && <Mainmenu />}
-                {gameState === "quiz" && <Quiz />}
-                {gameState === "endScreen" && <EndScreen />}
+                {gameState === "quiz" && <Quiz />}              
             </QuizContext.Provider>
         </Container>
     );
