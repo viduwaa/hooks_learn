@@ -13,7 +13,7 @@ export default function QuizApp() {
             <QuizContext.Provider value={{ gameState, setGameState }}>
                 <h1 className="text-center">Quizz App</h1>
                 {gameState === "menu" && <Mainmenu />}
-                {gameState === "quiz" && <Quiz />}              
+                {gameState === "quiz" && <Quiz className/>}              
             </QuizContext.Provider>
         </Container>
     );
