@@ -3,7 +3,7 @@ import he from "he";
 import { Button } from "react-bootstrap";
 import { ResultScreen } from "../Components/ResultScreen";
 
-export function Questions() {
+export function Questions({qCatergory}:{qCatergory:string}) {
     const [resultScreen, setResultScreen] = useState(false);
     const [stored, setStored] = useState(false);
     const [button, setButton] = useState(false);
@@ -66,7 +66,8 @@ export function Questions() {
 
     useEffect(() => {
         fetch(
-            "https://opentdb.com/api.php?amount=5&category=18&difficulty=medium&type=multiple"
+            //catergory 15=games 18=it
+            `https://opentdb.com/api.php?amount=10&category=${qCatergory}&difficulty=medium&type=multiple`
         )
             .then((response) => {
                 if (!response.ok) {
