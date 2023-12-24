@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect,  useState } from "react";
 import he from "he";
 import { Button } from "react-bootstrap";
 import { ResultScreen } from "../Components/ResultScreen";
@@ -64,6 +64,8 @@ export function Questions({qCatergory}:{qCatergory:string}) {
         return `Your Score is ${finalMarks} /` + " " + correct_answers.length;
     }
 
+   
+
     useEffect(() => {
         fetch(
             //catergory 15=games 18=it
@@ -118,12 +120,13 @@ export function Questions({qCatergory}:{qCatergory:string}) {
     return (
         <>
             {stored ? (
-                <div className="d-flex flex-md-nowrap flex-wrap mt-md-5 mt-2">
+                <div className="d-flex flex-md-nowrap flex-wrap mt-md-5 mt-2 mb-5">
                     <form
                         action=""
-                        className="border-right border-start border-end  p-4 m-md-auto"
+                        className="border-right border rounded p-4 m-md-auto"
                     >
                         {questions.map((question, index1) => (
+                            
                             <fieldset key={index1} className="mb-3">
                                 <p className="fs-5 fs-md-1 fw-bold">
                                     {index1 + 1},{he.decode(question)}
@@ -175,10 +178,12 @@ export function Questions({qCatergory}:{qCatergory:string}) {
                         ))}
                         <div className="d-flex gap-3">
                             {!resultScreen ? (
-                                <>
-                                    <Button id="submit" onClick={handleButton}>
+                                <><a href="#resultscreen">
+                                    <Button id="submit" onClick={
+                                        handleButton
+                                        }>
                                         Submit
-                                    </Button>
+                                    </Button></a>
                                     <label
                                         className={
                                             button
@@ -193,7 +198,7 @@ export function Questions({qCatergory}:{qCatergory:string}) {
                         </div>
                     </form>
                     {resultScreen ? (
-                        <ResultScreen Marks={FinalResult()} />
+                        <ResultScreen Marks={FinalResult()}  />
                     ) : null}
                     
                 </div>

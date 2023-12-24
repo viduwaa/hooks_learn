@@ -7,7 +7,7 @@ import { QuizContext } from "./Helpers/Context";
 
 export default function QuizApp() {
     const [gameState, setGameState] = useState("menu");
-    const [quizCatergory, setQuizCatergory] = useState("");
+    const [quizCatergory, setQuizCatergory] = useState(['']);
     return (
         <Container>
             <QuizContext.Provider value={{ gameState, setGameState,quizCatergory,setQuizCatergory }}>
