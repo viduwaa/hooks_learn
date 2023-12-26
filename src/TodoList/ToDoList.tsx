@@ -19,7 +19,6 @@ export function ToDoList() {
 		setAddedTexts(updatedTexts)
 	}
 
-	console.log(addedTexts)
 
     return (
         <Container>

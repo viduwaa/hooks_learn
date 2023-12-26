@@ -128,22 +128,22 @@ export function Questions({qCatergory}:{qCatergory:string}) {
                         {questions.map((question, index1) => (
                             
                             <fieldset key={index1} className="mb-3">
-                                <p className="fs-5 fs-md-1 fw-bold">
-                                    {index1 + 1},{he.decode(question)}
+                                <p className="fs-3  fw-bold">
+                                    {index1 + 1+", "}{he.decode(question)}
                                 </p>
                                 <div className="list-group">
                                     {answers[index1].map(
                                         (answerlist, subindex) => (
                                             <div
                                                 key={`ans${subindex}`}
-                                                className="list-group-item d-flex gap-2"
+                                                className="list-group-item d-flex gap-2 fs-4"
                                                 style={{
                                                     background:
                                                         resultScreen &&
                                                         correct_answers.includes(
                                                             answerlist
                                                         )
-                                                            ? "green"
+                                                            ? "lime"
                                                             : undefined,
                                                 }}
                                             >

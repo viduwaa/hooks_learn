@@ -1,10 +1,27 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
 body{
-    background: white;
+    background: #E7ECF3;
     color: black;
 }
   
+a{
+  text-decoration: none;
+  color: white;
+}
+
+
+#navlinks{
+  color: rgb(206, 199, 199);
+  transition: scale 300ms ease-in;
+}
+
+.active {
+  color: #fff !important;
+  scale: 1.3;
+}
+
+
 
 .loader {
     width: 120px;
@@ -19,3 +36,5 @@ body{
   @keyframes l1 {
     0% {background-position: right}
   }
+
+
