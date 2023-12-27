@@ -3,10 +3,10 @@ import { QuizContext } from "../Helpers/Context";
 import { Questions } from "../Helpers/Questions";
 
 export  function Quiz() {
-  const { quizCatergory } = useContext(QuizContext);
+  const { quizCatergory,size } = useContext(QuizContext);
   return (
     <div>
-        <Questions qCatergory={quizCatergory}/>
+        <Questions qCatergory={quizCatergory} qSize={size}/>
     </div>
   )
 }

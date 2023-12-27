@@ -1,5 +1,5 @@
 import { BSNavbar } from "./Components/Navbar";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import {AllApps} from "./pages/AllApps";
 import {About} from "./pages/About";
 import QuizApp from "./QuizzApp/QuizApp";

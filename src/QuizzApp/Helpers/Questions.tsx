@@ -3,7 +3,13 @@ import he from "he";
 import { Button } from "react-bootstrap";
 import { ResultScreen } from "../Components/ResultScreen";
 
-export function Questions({qCatergory}:{qCatergory:string}) {
+export function Questions({
+    qCatergory,
+    qSize,
+}: {
+    qCatergory: string;
+    qSize: string;
+}) {
     const [resultScreen, setResultScreen] = useState(false);
     const [stored, setStored] = useState(false);
     const [button, setButton] = useState(false);
@@ -11,6 +17,8 @@ export function Questions({qCatergory}:{qCatergory:string}) {
     const [answers, setAnswers] = useState<string[][]>([]);
     const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
     const [correct_answers, setCorrect_answers] = useState<string[]>([]);
+
+    
 
     const controller = new AbortController();
 
@@ -64,12 +72,12 @@ export function Questions({qCatergory}:{qCatergory:string}) {
         return `Your Score is ${finalMarks} /` + " " + correct_answers.length;
     }
 
-   
+    
 
     useEffect(() => {
         fetch(
             //catergory 15=games 18=it
-            `https://opentdb.com/api.php?amount=10&category=${qCatergory}&difficulty=medium&type=multiple`
+            `https://opentdb.com/api.php?amount=${qSize}&category=${qCatergory}&difficulty=medium&type=multiple`
         )
             .then((response) => {
                 if (!response.ok) {
@@ -126,10 +134,10 @@ export function Questions({qCatergory}:{qCatergory:string}) {
                         className="border-right border rounded p-4 m-md-auto"
                     >
                         {questions.map((question, index1) => (
-                            
                             <fieldset key={index1} className="mb-3">
                                 <p className="fs-3  fw-bold">
-                                    {index1 + 1+", "}{he.decode(question)}
+                                    {index1 + 1 + ", "}
+                                    {he.decode(question)}
                                 </p>
                                 <div className="list-group">
                                     {answers[index1].map(
@@ -178,12 +186,17 @@ export function Questions({qCatergory}:{qCatergory:string}) {
                         ))}
                         <div className="d-flex gap-3">
                             {!resultScreen ? (
-                                <><a href="#resultscreen">
-                                    <Button id="submit" onClick={
-                                        handleButton
-                                        }>
+                                <>
+                                    <Button
+                                        id="submit"
+                                        onClick={() => {
+                                            handleButton();
+                                            
+                                            
+                                        }}
+                                    >
                                         Submit
-                                    </Button></a>
+                                    </Button>
                                     <label
                                         className={
                                             button
@@ -198,13 +211,14 @@ export function Questions({qCatergory}:{qCatergory:string}) {
                         </div>
                     </form>
                     {resultScreen ? (
-                        <ResultScreen Marks={FinalResult()}  />
+                        <ResultScreen Marks={FinalResult()} />
                     ) : null}
-                    
                 </div>
-                
             ) : (
-                <div id="loader" className="d-flex align-items-center justify-content-center loader m-auto"></div>
+                <div
+                    id="loader"
+                    className="d-flex align-items-center justify-content-center loader m-auto"
+                ></div>
             )}{" "}
         </>
     );

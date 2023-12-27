@@ -7,7 +7,7 @@ export function ContentCard({location,context,photo}:{location:string,context:st
   const cardImg = photo
   return (
     <Card style={{ width: '18rem' }} className='border-black rounded'>
-      <Card.Img style={{maxHeight:'150px', objectFit:"cover"}} variant="top" src={`public/assests/${cardImg}` }/>
+      <Card.Img style={{maxHeight:'150px', objectFit:"cover"}} variant="top" src={`assests/${cardImg}` }/>
       <Card.Body className='d-flex flex-column justify-content-around rounded' style={{background:"#DBE4EF"}}>
         <Card.Title>{location.toUpperCase()}</Card.Title>
         <Card.Text>

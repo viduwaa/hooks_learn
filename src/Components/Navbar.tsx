@@ -2,12 +2,12 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
-import { ImNewTab } from "react-icons/im";
+import { FaGithub } from "react-icons/fa";
 
 export function BSNavbar() {
     return (
         <>
-            <Navbar bg="dark" data-bs-theme="dark" style={{ height: "50px" }}>
+            <Navbar id="nav" bg="dark" data-bs-theme="dark" style={{ height: "50px" }}>
                 <Container className="d-flex gap-3 ">
                     <NavLink
                         id="navlinks"
@@ -25,7 +25,7 @@ export function BSNavbar() {
                             to="https://viduwaa.github.io/#sec3"
                             target="_blank"
                         >
-                            More Projects <ImNewTab />
+                            More Projects <FaGithub />
                         </NavLink>
                     </Nav>
                 </Container>
