@@ -24,6 +24,7 @@ export function ToDoList() {
         <Container>
             <TodoInput onAddText={handleAddText} />
 			<TodoItem addedText={addedTexts}  onRemoveText={handleRemoveText}/>
+			
         </Container>
     );
 }

@@ -21,7 +21,7 @@ export function TodoInput({onAddText}:InputProps) {
     }
 
     return (
-        <div>
+        <div id="TodoInput" className="w-50  m-auto">
             <Form>
                 <Form.Label className="my-2">Enter a Task</Form.Label>
                 <Form.Control

@@ -3,10 +3,10 @@ import AboutItem from "../Components/AboutItem";
 import { FaReact } from "react-icons/fa";
 import { FaBootstrap } from "react-icons/fa";
 import { TbBrandVite } from "react-icons/tb";
-
+import { BiLogoTypescript } from "react-icons/bi";
 export function About() {
     return (
-        <Container className="mt-5">
+        <Container className="pt-5">
             <ListGroup as="ol" numbered>
                 <AboutItem
                     Heading="Main Target"
@@ -25,8 +25,11 @@ export function About() {
                             <>
                                 React <FaReact color="blue" size="30" /> + Vite{" "}
                                 <TbBrandVite color="purple" size="30" /> <br />{" "}
+                                TypeScript 
+                                <BiLogoTypescript color="blue" size="30" />
+                                <br />
                                 Bootstrap{" "}
-                                <FaBootstrap color="purple" size="30" /> <br />
+                                <FaBootstrap color="purple" size="28" /> <br />
                             </>
                         </>
                     }
