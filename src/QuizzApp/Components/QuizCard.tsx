@@ -11,29 +11,34 @@ export function QuestionType({
     quizType: string;
     quizCatergory: number;
 }) {
-    const { setGameState, setQuizCatergory, setSize } =
-        useContext(QuizContext);
+    const { setGameState, setQuizCatergory, setSize,setDifficulty } = useContext(QuizContext);
 
     return (
-        <Card className="text-center" style={{ minWidth: "40%",maxWidth:"450px" }}>
-            <Card.Body>
+        <Card id="qCard" className="text-center">
+            <Card.Body className="d-flex flex-column w-100">
                 <Card.Title>{quizType}</Card.Title>
-                <Card.Text className="d-flex flex-wrap justify-content-center">
+                <Card.Text className="d-flex justify-content-center w-100 mb-2">
                     <Form.Select
+                        className="me-2"
                         onChange={(event) => {
                             setSize(event.target.value);
                         }}
-                        aria-label="Default select example"
                     >
                         <option value="5">5</option>
                         <option value="10">10</option>
                     </Form.Select>{" "}
-                    <span className="my-auto ms-2">
-                        Intermediate Questions about {quizType}
-                    </span>
+                    <Form.Select className="w-50" onChange={(event) => {
+                        setDifficulty(event.target.value);
+                        }}>
+                            
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Intermediate</option>
+                        <option value="hard">Hard</option>
+                    </Form.Select>{" "}
                 </Card.Text>
-
+                <span className="mb-2">Questions about {quizType}</span>
                 <Button
+                    className="w-75 m-auto"
                     onClick={() => {
                         setGameState("quiz");
                         setQuizCatergory(quizCatergory);

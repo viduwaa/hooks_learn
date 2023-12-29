@@ -6,9 +6,11 @@ import { ResultScreen } from "../Components/ResultScreen";
 export function Questions({
     qCatergory,
     qSize,
+    qDifficulty
 }: {
     qCatergory: string;
     qSize: string;
+    qDifficulty:string
 }) {
     const [resultScreen, setResultScreen] = useState(false);
     const [stored, setStored] = useState(false);
@@ -77,7 +79,8 @@ export function Questions({
     useEffect(() => {
         fetch(
             //catergory 15=games 18=it
-            `https://opentdb.com/api.php?amount=${qSize}&category=${qCatergory}&difficulty=medium&type=multiple`
+            `https://opentdb.com/api.php?amount=${qSize}&category=${qCatergory}&difficulty=${qDifficulty}&type=multiple`
+            
         )
             .then((response) => {
                 if (!response.ok) {
